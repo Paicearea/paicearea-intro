@@ -39,9 +39,16 @@ export default function BlogSection() {
             href={post.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="block p-6 border border-gray-200 dark:border-gray-700 rounded-lg shadow hover:shadow-lg transition bg-[var(--background)]"
+            className="block p-6 rounded-lg shadow hover:shadow-lg transition-colors duration-300 border"
+            style={{
+              backgroundColor: "#FAF6E9",
+              borderColor: "#DDEB9D",
+            }}
           >
-            <h3 className="text-xl font-semibold text-[var(--foreground)]">
+            <h3
+              className="text-xl font-semibold mb-1"
+              style={{ color: "#A0C878" }}
+            >
               {post.title}
             </h3>
             <p className="text-sm mb-2 text-gray-500 dark:text-gray-400">
@@ -53,6 +60,19 @@ export default function BlogSection() {
           </a>
         ))}
       </div>
+
+      {/* 다크 모드 대응 스타일 */}
+      <style jsx>{`
+        @media (prefers-color-scheme: dark) {
+          #blog a {
+            background-color: #1a1a1a !important;
+            border-color: #ddeb9d !important;
+          }
+          #blog h3 {
+            color: #a0c878 !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

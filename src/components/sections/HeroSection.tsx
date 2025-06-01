@@ -27,14 +27,17 @@ export default function HeroSection() {
     <motion.section
       id="hero"
       className="h-screen pt-24 flex flex-col justify-center items-center 
-        bg-gradient-to-b from-[var(--background)] to-gray-100 dark:to-neutral-900 
+        bg-gradient-to-b from-[var(--background)] to-[#FAF6E9] dark:to-[#1a1a1a]
         text-center transition-colors duration-300"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
       <div className="max-w-2xl px-6">
-        <h1 className="text-5xl sm:text-6xl font-bold text-[var(--foreground)] leading-tight mb-6">
+        <h1
+          className="text-5xl sm:text-6xl font-bold leading-tight mb-6"
+          style={{ color: "#A0C878" }}
+        >
           {greetingParts[0]},
           <br />
           {greetingParts[1]}
@@ -43,6 +46,15 @@ export default function HeroSection() {
           {profile.description}
         </p>
       </div>
+
+      {/* 다크 모드에서 제목 색상 바꾸기 */}
+      <style jsx>{`
+        @media (prefers-color-scheme: dark) {
+          #hero h1 {
+            color: #ddeb9d !important;
+          }
+        }
+      `}</style>
     </motion.section>
   );
 }

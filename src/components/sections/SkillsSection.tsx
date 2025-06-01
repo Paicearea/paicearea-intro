@@ -22,22 +22,40 @@ export default function SkillsSection() {
   if (!content) return null;
 
   return (
-    <motion.section
+    <section
       id="skills"
       className="min-h-screen py-24 px-6 bg-[var(--background)] transition-colors duration-300"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
     >
-      <div className="max-w-3xl mx-auto bg-white dark:bg-[#1a1a1a] p-8 rounded-2xl shadow transition-colors duration-300">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+      <motion.div
+        className="max-w-3xl mx-auto p-8 rounded-2xl shadow transition-colors duration-300"
+        style={{ backgroundColor: "#FAF6E9" }}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <h2
+          className="text-3xl font-bold text-center mb-8"
+          style={{ color: "#A0C878" }}
+        >
           ⚒️ Skills
         </h2>
-        <div className="prose prose-lg dark:prose-invert text-gray-700 dark:text-gray-300">
+        <div className="prose prose-lg text-gray-700 dark:text-gray-300">
           <MDXRemote {...content} />
         </div>
-      </div>
-    </motion.section>
+      </motion.div>
+
+      <style jsx>{`
+        @media (prefers-color-scheme: dark) {
+          #skills > div {
+            background-color: #1a1a1a !important;
+          }
+
+          #skills h2 {
+            color: #ddeb9d !important;
+          }
+        }
+      `}</style>
+    </section>
   );
 }

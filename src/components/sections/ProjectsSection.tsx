@@ -35,23 +35,34 @@ export default function ProjectsSection() {
         {projects.map((project, i) => (
           <motion.div
             key={i}
-            className="group border border-gray-200 dark:border-gray-700 p-6 rounded-2xl bg-white dark:bg-[#1a1a1a] shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+            className="group p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border"
+            style={{
+              backgroundColor: "#FAF6E9",
+              borderColor: "#DDEB9D",
+            }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-semibold text-gray-800 dark:text-white group-hover:text-blue-600 transition mb-2">
+            <h3
+              className="text-2xl font-semibold mb-2 transition"
+              style={{ color: "#A0C878" }}
+            >
               {project.title}
             </h3>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               {project.description}
             </p>
             <div className="flex flex-wrap gap-2 mb-4">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-sm bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-medium px-3 py-1 rounded-full"
+                  className="text-sm font-medium px-3 py-1 rounded-full"
+                  style={{
+                    backgroundColor: "#DDEB9D",
+                    color: "#1a1a1a",
+                  }}
                 >
                   #{tag}
                 </span>
@@ -61,13 +72,41 @@ export default function ProjectsSection() {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block text-sm text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 font-medium transition"
+              className="inline-block text-sm font-medium transition"
+              style={{ color: "#A0C878" }}
             >
               GitHub ↗
             </a>
           </motion.div>
         ))}
       </div>
+
+      {/* 다크 모드 대응 스타일 */}
+      <style jsx>{`
+        @media (prefers-color-scheme: dark) {
+          #projects .group {
+            background-color: #1a1a1a !important;
+            border-color: #ddeb9d !important;
+          }
+
+          #projects h3 {
+            color: #ddeb9d !important;
+          }
+
+          #projects span {
+            background-color: #333 !important;
+            color: #ddeb9d !important;
+          }
+
+          #projects a {
+            color: #a0c878 !important;
+          }
+
+          #projects a:hover {
+            color: #ddeb9d !important;
+          }
+        }
+      `}</style>
     </motion.section>
   );
 }
