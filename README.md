@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌐 Paicearea Intro Page
 
-## Getting Started
+안녕하세요! 👋
+이 프로젝트는 프론트엔드 개발자 **Paicearea**의 포트폴리오 및 자기소개 페이지입니다.
+Next.js 14의 App Router 구조를 기반으로 하여, 다양한 기술 스택과 깔끔한 UI를 통해 저를 소개하고 있어요.
 
-First, run the development server:
+## ✨ 주요 기능
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Hero Section**: 간단한 자기소개
+- **About Section**: MDX로 작성된 자기소개 내용
+- **Skills Section**: 사용 기술 스택을 시각적으로 소개 (MDX 지원)
+- **Projects Section**: 실제 프로젝트 목록과 GitHub 링크
+- **Blog Section**: Tistory RSS 피드를 활용한 최신 블로그 글 목록 표시
+- **Dark Mode Toggle** 🌙: 사용자의 시스템 설정 또는 수동 전환 지원
+- **Navbar Scroll Spy**: 현재 스크롤 위치에 따라 네비게이션 하이라이팅
+
+## 🛠 사용 기술
+
+- **Next.js 14 (App Router)**
+- **React 18**
+- **TypeScript**
+- **TailwindCSS**
+- **Framer Motion** (애니메이션)
+- **MDX** (각 콘텐츠)
+- **Tistory RSS 파싱** (블로그 섹션)
+
+## 🌙 다크 모드 지원
+
+사용자 시스템 설정에 따라 자동 전환되며, 우측 하단의 토글 버튼으로 수동 전환도 가능합니다.
+
+```tsx
+<html lang="en" className="dark"> // 또는 자바스크립트로 class 토글
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📦 설치 및 실행
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+git clone https://github.com/paicearea/paicearea-intro-page.git
+cd paicearea-intro-page
+git clone https://github.com/paicearea/paicearea-intro-page.git
+pnpm install
+pnpm dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
 
-## Learn More
+## 🧠 하고 싶은 말
 
-To learn more about Next.js, take a look at the following resources:
+이 프로젝트는 단순한 소개 페이지라기보다, Next.js를 공부하고 다양한 기능을 경험해보기 위한 학습용 프로젝트입니다.
+다크 모드, MDX 콘텐츠 렌더링, RSS 파싱 등 실무에서 자주 접할 수 있는 기능들을 직접 구현해보며
+프론트엔드 개발자로서의 실력을 키워나가기 위한 작은 실험장이기도 해요.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+함께 보고, 이야기하고 싶은 분은 언제든 연락 주세요! 😊
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Made with ❤️ by Paicearea**
