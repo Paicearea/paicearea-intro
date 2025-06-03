@@ -30,7 +30,7 @@ export default function ProfileSection() {
   return (
     <motion.section
       id="profile"
-      className="py-70 px-6 flex justify-center items-center transition-colors dark:text-white"
+      className="pt-30 sm:pt-40 md:pt-70 pb-70 px-6 flex justify-center items-center transition-colors dark:text-white"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}

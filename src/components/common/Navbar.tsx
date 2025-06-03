@@ -71,8 +71,15 @@ export default function Navbar() {
             <li key={section}>
               <a
                 href={`#${section}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMenuOpen(false);
+                  setActive(section);
+                  const el = document.getElementById(section);
+                  el?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
                 className={clsx(
-                  "transition-all duration-300 px-3 py-1 rounded-md",
+                  "block transition-all duration-300 px-3 py-2 rounded-md",
                   active === section
                     ? "bg-gray-200 dark:bg-zinc-800 font-semibold"
                     : "hover:bg-gray-100 dark:hover:bg-zinc-800"
@@ -112,7 +119,18 @@ export default function Navbar() {
               <li key={section}>
                 <a
                   href={`#${section}`}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMenuOpen(false);
+                    setActive(section);
+                    setTimeout(() => {
+                      const el = document.getElementById(section);
+                      el?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }, 100);
+                  }}
                   className={clsx(
                     "block transition-all duration-300 px-3 py-2 rounded-md",
                     active === section

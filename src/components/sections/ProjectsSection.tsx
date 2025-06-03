@@ -42,30 +42,42 @@ export default function ProjectsSection() {
               viewport={{ once: true, amount: 0.3 }}
             >
               <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">Title</dt>
-                <dd className="text-right dark:text-white flex-1">{project.title}</dd>
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
+                  Title
+                </dt>
+                <dd className="text-right dark:text-white flex-1">
+                  {project.title}
+                </dd>
               </div>
 
               <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">Description</dt>
-                <dd className="text-right dark:text-white flex-1">{project.description}</dd>
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
+                  Description
+                </dt>
+                <dd className="text-right dark:text-white flex-1">
+                  {project.description}
+                </dd>
               </div>
 
               <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">Tags</dt>
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
+                  Tags
+                </dt>
                 <dd className="text-right dark:text-white flex-1">
                   {project.tags.map((tag) => `#${tag}`).join(", ")}
                 </dd>
               </div>
 
               <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">GitHub</dt>
-                <dd className="text-right flex-1">
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
+                  GitHub
+                </dt>
+                <dd className="text-right flex-1 overflow-hidden">
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline text-blue-500 dark:text-blue-400 hover:opacity-80"
+                    className="underline text-blue-500 dark:text-blue-400 hover:opacity-80 w-full break-words block"
                   >
                     {project.github}
                   </a>
