@@ -26,7 +26,7 @@ export default function ToggleDescriptionButton() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="absolute left-0 top-full mt-2 z-20 w-full p-4 bg-white dark:bg-zinc-900 rounded-md shadow"
+            className="absolute left-0 top-full mt-2 z-20 w-full p-4 dark:text-white dark:bg-zinc-900 rounded-md shadow"
           >
             <Suspense
               fallback={<p className="text-sm text-gray-500">로딩 중...</p>}
