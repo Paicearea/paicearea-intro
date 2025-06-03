@@ -1,0 +1,25 @@
+{
+  "title": "⚒️ Skills",
+  "categories": [
+    {
+      "title": "프레임워크 & 라이브러리",
+      "items": ["React", "Next.js", "Vite", "Webpack", "Turbopack"]
+    },
+    {
+      "title": "언어 & 스타일링",
+      "items": ["TypeScript", "JavaScript", "Tailwind CSS", "Styled-Components"]
+    },
+    {
+      "title": "상태 관리",
+      "items": ["Recoil", "Redux Toolkit"]
+    },
+    {
+      "title": "협업 & 배포",
+      "items": ["Git", "GitHub", "GitHub Actions"]
+    },
+    {
+      "title": "기타",
+      "items": ["ESLint", "Prettier"]
+    }
+  ]
+}

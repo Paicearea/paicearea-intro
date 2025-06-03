@@ -1,12 +1,11 @@
 "use client";
 import { useEffect } from "react";
 import Navbar from "@/components/common/Navbar";
-import HeroSection from "@/components/sections/HeroSection";
-import AboutSection from "@/components/sections/AboutSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import Footer from "@/components/common/Footer";
 import SkillsSection from "@/components/sections/SkillsSection";
 import BlogSection from "@/components/sections/BlogSection";
+import ProfileSection from "@/components/sections/ProfileSection";
 
 export default function HomePage() {
   useEffect(() => {
@@ -14,10 +13,9 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="font-sans text-gray-800">
+    <main className="">
       <Navbar />
-      <HeroSection />
-      <AboutSection />
+      <ProfileSection />
       <SkillsSection />
       <ProjectsSection />
       <BlogSection />

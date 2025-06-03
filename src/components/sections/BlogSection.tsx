@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 type BlogPost = {
   title: string;
@@ -25,54 +26,58 @@ export default function BlogSection() {
   }, []);
 
   return (
-    <section
+    <motion.section
       id="blog"
-      className="min-h-screen py-24 px-6 bg-[var(--background)] transition-colors duration-300"
+      className="min-h-screen py-24 px-6 dark:text-white transition-colors"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
     >
-      <h2 className="text-3xl font-bold mb-10 text-center text-[var(--foreground)]">
-        📝 Blog
-      </h2>
-      <div className="max-w-3xl mx-auto space-y-6">
-        {posts.map((post, i) => (
-          <a
-            key={i}
-            href={post.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block p-6 rounded-lg shadow hover:shadow-lg transition-colors duration-300 border"
-            style={{
-              backgroundColor: "#FAF6E9",
-              borderColor: "#DDEB9D",
-            }}
-          >
-            <h3
-              className="text-xl font-semibold mb-1"
-              style={{ color: "#A0C878" }}
-            >
-              {post.title}
-            </h3>
-            <p className="text-sm mb-2 text-gray-500 dark:text-gray-400">
-              {new Date(post.pubDate).toLocaleDateString()}
-            </p>
-            <p className="text-sm line-clamp-3 text-gray-600 dark:text-gray-300">
-              {post.description}
-            </p>
-          </a>
-        ))}
-      </div>
+      <div className="max-w-3xl mx-auto p-8">
+        <h2 className="text-3xl font-bold mb-8">📝 Blog</h2>
 
-      {/* 다크 모드 대응 스타일 */}
-      <style jsx>{`
-        @media (prefers-color-scheme: dark) {
-          #blog a {
-            background-color: #1a1a1a !important;
-            border-color: #ddeb9d !important;
-          }
-          #blog h3 {
-            color: #a0c878 !important;
-          }
-        }
-      `}</style>
-    </section>
+        <dl className="divide-y divide-gray-200 dark:divide-gray-700">
+          {posts.map((post, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="py-4"
+            >
+              <div className="flex justify-between py-1 text-sm">
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">Title</dt>
+                <dd className="text-right flex-1">
+                  <a
+                    href={post.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-blue-500 dark:text-blue-400 hover:opacity-80"
+                  >
+                    {post.title}
+                  </a>
+                </dd>
+              </div>
+
+              <div className="flex justify-between py-1 text-sm">
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">Published</dt>
+                <dd className="text-right dark:text-white flex-1">
+                  {new Date(post.pubDate).toLocaleDateString()}
+                </dd>
+              </div>
+
+              <div className="flex justify-between py-1 text-sm">
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">Summary</dt>
+                <dd className="text-right dark:text-white flex-1 line-clamp-3">
+                  {post.description}
+                </dd>
+              </div>
+            </motion.div>
+          ))}
+        </dl>
+      </div>
+    </motion.section>
   );
 }

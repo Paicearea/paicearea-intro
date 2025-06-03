@@ -23,14 +23,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer
-      className="py-10 mt-16 text-center text-sm shadow-inner border-t transition-colors duration-300"
-      style={{
-        backgroundColor: "#FAF6E9",
-        borderColor: "#DDEB9D",
-        color: "#666",
-      }}
-    >
+    <footer className="py-10 mt-16 text-center text-sm border-t text-gray-700 shadow-inner border-gray-200 dark:bg-black dark:text-gray-300 dark:border-zinc-800 transition-colors duration-300">
       <div className="flex justify-center gap-6 mb-4">
         {socials.map((social) => (
           <a
@@ -38,42 +31,16 @@ export default function Footer() {
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 transition-colors duration-200"
-            style={{ color: "#666" }}
-            onMouseOver={(e) => (e.currentTarget.style.color = "#A0C878")}
-            onMouseOut={(e) => (e.currentTarget.style.color = "#666")}
+            className="flex items-center gap-2 hover:text-black dark:hover:text-white transition-colors duration-200"
           >
             {iconMap[social.name] || null}
             <span className="hidden sm:inline">{social.name}</span>
           </a>
         ))}
       </div>
-      <p style={{ fontSize: "0.75rem", color: "#888" }}>
+      <p className="text-xs text-gray-500 dark:text-gray-500">
         &copy; {new Date().getFullYear()} Paicearea. All rights reserved.
       </p>
-
-      {/* 다크 모드 대응 */}
-      <style jsx>{`
-        @media (prefers-color-scheme: dark) {
-          footer {
-            background-color: #1a1a1a !important;
-            border-color: #ddeb9d !important;
-            color: #ddeb9d !important;
-          }
-
-          footer a {
-            color: #ddeb9d !important;
-          }
-
-          footer a:hover {
-            color: #a0c878 !important;
-          }
-
-          footer p {
-            color: #888 !important;
-          }
-        }
-      `}</style>
     </footer>
   );
 }
