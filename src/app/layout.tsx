@@ -15,12 +15,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-        />
-      </head>
       <body className="font-sans antialiased transition-colors duration-300 dark:text-white bg-white dark:bg-black">
         <ThemeProvider>
           {children}
