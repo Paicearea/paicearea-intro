@@ -48,7 +48,9 @@ export default function BlogSection() {
               className="py-4"
             >
               <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">Title</dt>
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
+                  Title
+                </dt>
                 <dd className="text-right flex-1">
                   <a
                     href={post.link}
@@ -62,14 +64,18 @@ export default function BlogSection() {
               </div>
 
               <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">Published</dt>
-                <dd className="text-right dark:text-white flex-1">
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
+                  Published
+                </dt>
+                <dd className="text-right text-gray-800 dark:text-white flex-1">
                   {new Date(post.pubDate).toLocaleDateString()}
                 </dd>
               </div>
 
               <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">Summary</dt>
+                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
+                  Summary
+                </dt>
                 <dd className="text-right dark:text-white flex-1 line-clamp-3">
                   {post.description}
                 </dd>

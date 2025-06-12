@@ -15,11 +15,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="font-sans antialiased transition-colors duration-300 dark:text-white bg-white dark:bg-black">
-        <ThemeProvider>
-          {children}
-          <DarkModeToggle />
-        </ThemeProvider>
+      <body className="bg-white dark:bg-black transition-colors duration-300">
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
