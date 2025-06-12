@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import DarkModeToggle from "@/components/DarkModeToggle";
 import ThemeProvider from "@/app/theme-provider";
 
 export const metadata: Metadata = {
