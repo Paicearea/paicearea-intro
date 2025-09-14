@@ -3,11 +3,11 @@
 export default function ResumeDownloadButton() {
   return (
     <a
-      href="/frontend-developer_배채은.pdf"
+      href="/공통_Notion.pdf"
       download
       className="text-sm dark:text-white hover:underline cursor-alias whitespace-nowrap"
     >
-      이력서 다운로드
+      포트폴리오 다운로드
     </a>
   );
 }

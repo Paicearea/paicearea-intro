@@ -7,6 +7,7 @@ type Project = {
   title: string;
   description: string;
   github: string;
+  deploy?: string;
   tags: string[];
 };
 
@@ -16,7 +17,8 @@ export default function ProjectsSection() {
   useEffect(() => {
     fetch("/data/projects.json")
       .then((res) => res.json())
-      .then(setProjects);
+      .then((data) => setProjects(Array.isArray(data) ? data : []))
+      .catch(() => setProjects([]));
   }, []);
 
   return (
@@ -34,7 +36,7 @@ export default function ProjectsSection() {
         <dl className="divide-y divide-gray-200 dark:divide-gray-700">
           {projects.map((project, i) => (
             <motion.div
-              key={i}
+              key={`${project.title}-${i}`}
               className="py-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -64,9 +66,28 @@ export default function ProjectsSection() {
                   Tags
                 </dt>
                 <dd className="text-right dark:text-white flex-1">
-                  {project.tags.map((tag) => `#${tag}`).join(", ")}
+                  {(project.tags ?? []).map((tag) => `#${tag}`).join(", ")}
                 </dd>
               </div>
+
+              {/* ✅ Deploy (있을 때만 표시) */}
+              {project.deploy && (
+                <div className="flex justify-between py-1 text-sm">
+                  <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
+                    Deploy
+                  </dt>
+                  <dd className="text-right flex-1 overflow-hidden">
+                    <a
+                      href={project.deploy}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline text-blue-500 dark:text-blue-400 hover:opacity-80 w-full break-words block"
+                    >
+                      {project.deploy}
+                    </a>
+                  </dd>
+                </div>
+              )}
 
               <div className="flex justify-between py-1 text-sm">
                 <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
