@@ -2,35 +2,28 @@
   "title": "⚒️ Skills",
   "categories": [
     {
-      "title": "프레임워크 & 라이브러리",
-      "items": [
-        "React",
-        "React Native",
-        "Next.js",
-        "Vite",
-        "Webpack",
-        "Turbopack"
-      ]
+      "title": "Core",
+      "items": ["React", "React Native", "Next.js", "TypeScript", "JavaScript"]
     },
     {
-      "title": "언어 & 스타일링",
-      "items": ["TypeScript", "JavaScript", "Tailwind CSS", "Styled-Components"]
+      "title": "Development & Build Tools",
+      "items": ["Webpack", "Vite", "Pnpm", "Electron", "Docker"]
     },
     {
-      "title": "상태 관리",
-      "items": ["Recoil", "Redux Toolkit"]
+      "title": "Deployment & CI/CD",
+      "items": ["Vercel", "GitHub Actions"]
     },
     {
-      "title": "협업",
+      "title": "Styling",
+      "items": ["Styled-Components", "Tailwind CSS", "Emotion"]
+    },
+    {
+      "title": "Design",
+      "items": ["Figma"]
+    },
+    {
+      "title": "Cooperation",
       "items": ["Git", "GitHub", "Jira", "Notion"]
-    },
-    {
-      "title": "배포",
-      "items": ["GitHub Actions", "Vercel"]
-    },
-    {
-      "title": "기타",
-      "items": ["ESLint", "Prettier"]
     }
   ]
 }
