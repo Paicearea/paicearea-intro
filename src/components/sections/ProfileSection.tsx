@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import ResumeDownloadButton from "@/components/ResumeDownloadButton";
 import ToggleDescriptionButton from "@/components/ToggleDescriptionButton";
 
 type Profile = {
@@ -94,7 +93,6 @@ export default function ProfileSection() {
             )}
           </dl>
           <div className="flex flex-col sm:flex-row gap-4 mt-1 items-start sm:items-center">
-            <ResumeDownloadButton />
             <ToggleDescriptionButton />
           </div>
         </div>
