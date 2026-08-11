@@ -60,25 +60,25 @@ export default function ProfileSection() {
           <dl className="text-sm divide-y divide-gray-200 dark:divide-gray-700 border-t border-white dark:border-gray-500">
             {profile.role && (
               <div className="flex justify-between py-2">
-                <dt className="font-medium text-gray-500">Role</dt>
+                <dt className="font-medium text-gray-500 dark:text-gray-400">Role</dt>
                 <dd className="dark:text-white">{profile.role}</dd>
               </div>
             )}
             {profile.location && (
               <div className="flex justify-between py-2">
-                <dt className="font-medium text-gray-500">Location</dt>
+                <dt className="font-medium text-gray-500 dark:text-gray-400">Location</dt>
                 <dd className="dark:text-white">{profile.location}</dd>
               </div>
             )}
             {profile.email && (
               <div className="flex justify-between py-2">
-                <dt className="font-medium text-gray-500">Email</dt>
+                <dt className="font-medium text-gray-500 dark:text-gray-400">Email</dt>
                 <dd className="dark:text-white">{profile.email}</dd>
               </div>
             )}
             {profile.github && (
               <div className="flex justify-between py-2">
-                <dt className="font-medium text-gray-500">GitHub</dt>
+                <dt className="font-medium text-gray-500 dark:text-gray-400">GitHub</dt>
                 <dd className="dark:text-white">
                   <a
                     href={profile.github}

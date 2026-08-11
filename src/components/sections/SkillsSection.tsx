@@ -38,10 +38,10 @@ export default function SkillsSection() {
       >
         <h2 className="text-2xl font-semibold mb-6">{skills.title}</h2>
 
-        <dl className="divide-y divide-gray-200 text-sm">
+        <dl className="divide-y divide-gray-200 dark:divide-gray-700 text-sm">
           {skills.categories.map((cat, idx) => (
             <div key={idx} className="flex justify-between py-3">
-              <dt className="font-medium text-gray-500 w-48 shrink-0">
+              <dt className="font-medium text-gray-500 dark:text-gray-400 w-48 shrink-0">
                 {cat.title}
               </dt>
               <dd className="text-right dark:text-white flex-1">
