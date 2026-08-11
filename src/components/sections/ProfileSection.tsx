@@ -1,102 +1,79 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import AboutContent from "@/components/AboutContent";
 import ToggleDescriptionButton from "@/components/ToggleDescriptionButton";
+import type { Profile } from "@/types/content";
 
-type Profile = {
-  name: string;
-  role: string;
-  description: string;
-  greeting: string;
-  location?: string;
-  email?: string;
-  github?: string;
-  image?: string;
-};
-
-export default function ProfileSection() {
-  const [profile, setProfile] = useState<Profile | null>(null);
-
-  useEffect(() => {
-    fetch("/data/profile.json")
-      .then((res) => res.json())
-      .then(setProfile);
-  }, []);
-
-  if (!profile) return null;
-
+export default function ProfileSection({ profile }: { profile: Profile }) {
   return (
-    <motion.section
+    <section
       id="profile"
-      className="pt-30 sm:pt-40 md:pt-70 pb-70 px-6 flex justify-center items-center transition-colors dark:text-white"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      className="px-6 pb-28 pt-28 transition-colors sm:pt-36 md:pb-36 md:pt-48"
     >
-      <div className="flex flex-col md:flex-row gap-10 items-center max-w-4xl w-full">
-        {/* 왼쪽: 이미지 */}
-        {profile.image && (
-          <div className="w-60 h-80 rounded-2xl overflow-hidden shadow-md">
-            <img
-              src={profile.image}
-              alt={`Profile photo of ${profile.name}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        )}
+      <div className="mx-auto grid w-full max-w-5xl items-center gap-12 md:grid-cols-[320px_1fr]">
+        <div className="relative mx-auto aspect-[7/9] w-full max-w-[280px] overflow-hidden rounded-lg border border-gray-200 bg-gray-100 shadow-md dark:border-zinc-800 dark:bg-zinc-900 md:max-w-none">
+          <Image
+            src={profile.image}
+            alt={`${profile.name} 프로필 사진`}
+            width={700}
+            height={900}
+            sizes="(min-width: 768px) 320px, 70vw"
+            preload
+            className="h-full w-full object-cover"
+          />
+        </div>
 
-        {/* 오른쪽: 텍스트 (table-like) */}
-        <div className="flex-1 space-y-6">
+        <div className="space-y-8">
           <div className="text-center md:text-left">
-            <h1 className="text-2xl sm:text-3xl font-bold leading-tight">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">
+              {profile.role}
+            </p>
+            <h1 className="text-3xl font-bold leading-tight text-gray-950 dark:text-white sm:text-4xl">
               {profile.greeting}
             </h1>
-            <p className="mt-4 text-lg dark:text-white break-words whitespace-pre-line">
+            <p className="mt-5 max-w-2xl whitespace-pre-line break-words text-lg leading-8 text-gray-700 dark:text-gray-200">
               {profile.description}
             </p>
           </div>
 
-          <dl className="text-sm divide-y divide-gray-200 dark:divide-gray-700 border-t border-white dark:border-gray-500">
-            {profile.role && (
-              <div className="flex justify-between py-2">
-                <dt className="font-medium text-gray-500 dark:text-gray-400">Role</dt>
-                <dd className="dark:text-white">{profile.role}</dd>
-              </div>
-            )}
-            {profile.location && (
-              <div className="flex justify-between py-2">
-                <dt className="font-medium text-gray-500 dark:text-gray-400">Location</dt>
-                <dd className="dark:text-white">{profile.location}</dd>
-              </div>
-            )}
-            {profile.email && (
-              <div className="flex justify-between py-2">
-                <dt className="font-medium text-gray-500 dark:text-gray-400">Email</dt>
-                <dd className="dark:text-white">{profile.email}</dd>
-              </div>
-            )}
-            {profile.github && (
-              <div className="flex justify-between py-2">
-                <dt className="font-medium text-gray-500 dark:text-gray-400">GitHub</dt>
-                <dd className="dark:text-white">
-                  <a
-                    href={profile.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline hover:text-blue-500"
-                  >
-                    {profile.github}
-                  </a>
-                </dd>
-              </div>
-            )}
+          <dl className="grid gap-3 text-sm sm:grid-cols-3">
+            <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
+              <dt className="font-medium text-gray-500 dark:text-gray-400">
+                Location
+              </dt>
+              <dd className="mt-1 text-gray-900 dark:text-white">
+                {profile.location}
+              </dd>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
+              <dt className="font-medium text-gray-500 dark:text-gray-400">
+                Email
+              </dt>
+              <dd className="mt-1 break-words text-gray-900 dark:text-white">
+                {profile.email}
+              </dd>
+            </div>
+            <div className="rounded-lg border border-gray-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
+              <dt className="font-medium text-gray-500 dark:text-gray-400">
+                GitHub
+              </dt>
+              <dd className="mt-1">
+                <a
+                  href={profile.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline underline-offset-4 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                >
+                  Paicearea
+                </a>
+              </dd>
+            </div>
           </dl>
-          <div className="flex flex-col sm:flex-row gap-4 mt-1 items-start sm:items-center">
-            <ToggleDescriptionButton />
-          </div>
+
+          <ToggleDescriptionButton>
+            <AboutContent />
+          </ToggleDescriptionButton>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

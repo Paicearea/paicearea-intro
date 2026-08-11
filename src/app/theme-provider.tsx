@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 type ThemeContextType = {
@@ -16,12 +16,22 @@ export function useTheme() {
   return context;
 }
 
+function getInitialTheme(): Theme {
+  if (typeof document !== "undefined") {
+    return document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+  }
+
+  return "light";
+}
+
 export default function ThemeProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -30,6 +40,7 @@ export default function ThemeProvider({
       "(prefers-color-scheme: dark)"
     ).matches;
     const initial = saved ?? (prefersDark ? "dark" : "light");
+
     setTheme(initial);
     document.documentElement.classList.toggle("dark", initial === "dark");
     setMounted(true);
@@ -37,15 +48,14 @@ export default function ThemeProvider({
 
   useEffect(() => {
     if (!mounted) return;
+
     localStorage.setItem("theme", theme);
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme, mounted]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setTheme((current) => (current === "dark" ? "light" : "dark"));
   };
-
-  if (!mounted) return null;
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

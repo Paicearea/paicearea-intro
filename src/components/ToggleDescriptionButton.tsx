@@ -1,38 +1,42 @@
 "use client";
 
-import { useState, Suspense } from "react";
-import dynamic from "next/dynamic";
+import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const AboutContent = dynamic(() => import("./AboutContent"), { ssr: false });
-
-export default function ToggleDescriptionButton() {
+export default function ToggleDescriptionButton({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isOpen, setIsOpen] = useState(false);
+  const panelId = useId();
 
   return (
     <div className="relative w-full">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="text-sm dark:text-white hover:underline"
+        type="button"
+        onClick={() => setIsOpen((current) => !current)}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        className="inline-flex min-h-10 items-center rounded-md border border-gray-200 px-4 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-800"
       >
-        {isOpen ? "접기" : "자기소개 더 보기"}
+        {isOpen ? "자기소개 닫기" : "자기소개 보기"}
       </button>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
+            id={panelId}
             key="about"
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="absolute left-0 top-full mt-2 z-20 w-full p-4 bg-white dark:bg-zinc-900 dark:text-white rounded-md shadow"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22 }}
+            className="mt-4 rounded-lg border border-gray-200 bg-white p-5 text-gray-800 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-gray-100"
           >
-            <Suspense
-              fallback={<p className="text-sm text-gray-500 dark:text-gray-400">로딩 중...</p>}
-            >
-              <AboutContent />
-            </Suspense>
+            <div className="prose prose-sm max-w-none dark:prose-invert md:prose-base">
+              {children}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

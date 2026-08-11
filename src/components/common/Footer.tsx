@@ -1,46 +1,33 @@
-"use client";
-
-import { JSX, useEffect, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import type { Social } from "@/types/content";
 
-type Social = {
-  name: string;
-  url: string;
+const iconMap = {
+  GitHub: <FaGithub size={18} aria-hidden="true" />,
+  LinkedIn: <FaLinkedin size={18} aria-hidden="true" />,
 };
 
-const iconMap: Record<string, JSX.Element> = {
-  Github: <FaGithub size={18} />,
-  LinkedIn: <FaLinkedin size={18} />,
-};
-
-export default function Footer() {
-  const [socials, setSocials] = useState<Social[]>([]);
-
-  useEffect(() => {
-    fetch("/data/socials.json")
-      .then((res) => res.json())
-      .then(setSocials);
-  }, []);
-
+export default function Footer({ socials }: { socials: Social[] }) {
   return (
-    <footer className="py-10 mt-16 text-center text-sm border-t text-gray-700 shadow-inner border-gray-200 dark:bg-black dark:text-gray-300 dark:border-zinc-800 transition-colors duration-300">
-      <div className="flex justify-center gap-6 mb-4">
-        {socials.map((social) => (
-          <a
-            key={social.name}
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 hover:text-black dark:hover:text-white transition-colors duration-200"
-          >
-            {iconMap[social.name] || null}
-            <span className="hidden sm:inline">{social.name}</span>
-          </a>
-        ))}
+    <footer className="border-t border-gray-200 px-6 py-10 text-sm text-gray-600 transition-colors dark:border-zinc-800 dark:text-gray-300">
+      <div className="mx-auto flex max-w-5xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs text-gray-500">
+          &copy; {new Date().getFullYear()} Paicearea. All rights reserved.
+        </p>
+        <div className="flex gap-4">
+          {socials.map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-10 items-center gap-2 rounded-md px-3 transition-colors hover:bg-gray-100 hover:text-gray-950 dark:hover:bg-zinc-900 dark:hover:text-white"
+            >
+              {iconMap[social.name as keyof typeof iconMap] ?? null}
+              <span>{social.name}</span>
+            </a>
+          ))}
+        </div>
       </div>
-      <p className="text-xs text-gray-500 dark:text-gray-500">
-        &copy; {new Date().getFullYear()} Paicearea. All rights reserved.
-      </p>
     </footer>
   );
 }

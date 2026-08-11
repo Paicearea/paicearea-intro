@@ -1,29 +1,52 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import ThemeProvider from "@/app/theme-provider";
+import { site } from "@/content/site";
+import "./globals.css";
 
-// 서버 컴포넌트용 generateMetadata
+const themeScript = `
+try {
+  const saved = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const theme = saved || (prefersDark ? "dark" : "light");
+  document.documentElement.classList.toggle("dark", theme === "dark");
+} catch (_) {}
+`;
+
 export const metadata: Metadata = {
-  title: "Paicearea",
-  description: "프론트엔드 개발자 Paicearea의 개인 프로필입니다.",
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
   openGraph: {
-    title: "Paicearea",
-    description: "프론트엔드 개발자 Paicearea의 개인 프로필입니다.",
+    title: site.title,
+    description: site.description,
     type: "website",
+    url: site.url,
     images: [
       {
-        url: "https://paicearea-intro.vercel.app/images/avatar.png",
-        width: 1200,
-        height: 630,
+        url: "/images/avatar.png",
+        width: 576,
+        height: 576,
+        alt: "Paicearea avatar",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Paicearea",
-    description: "프론트엔드 개발자 Paicearea의 개인 프로필입니다.",
-    images: ["https://paicearea-intro.vercel.app/images/avatar.png"],
+    card: "summary",
+    title: site.title,
+    description: site.description,
+    images: ["/images/avatar.png"],
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
 };
 
 export default function RootLayout({
@@ -32,8 +55,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="bg-white dark:bg-black transition-colors duration-300">
+    <html lang="ko" suppressHydrationWarning>
+      <body className="min-h-screen">
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
