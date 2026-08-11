@@ -29,7 +29,7 @@ export default function ToggleDescriptionButton() {
             className="absolute left-0 top-full mt-2 z-20 w-full p-4 bg-white dark:bg-zinc-900 dark:text-white rounded-md shadow"
           >
             <Suspense
-              fallback={<p className="text-sm text-gray-500">로딩 중...</p>}
+              fallback={<p className="text-sm text-gray-500 dark:text-gray-400">로딩 중...</p>}
             >
               <AboutContent />
             </Suspense>
