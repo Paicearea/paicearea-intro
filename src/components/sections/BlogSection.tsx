@@ -14,14 +14,14 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
   return (
     <section
       id="blog"
-      className="border-t border-gray-200 bg-gray-50 px-6 py-24 transition-colors dark:border-zinc-800 dark:bg-zinc-950"
+      className="border-t border-gray-200 px-6 py-24 transition-colors dark:border-zinc-800"
     >
       <div className="mx-auto max-w-5xl">
         <div className="mb-10 max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">
+          <p className="text-sm font-normal uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">
             Writing
           </p>
-          <h2 className="mt-2 text-3xl font-bold text-gray-950 dark:text-white">
+          <h2 className="mt-2 text-4xl font-normal text-gray-950 dark:text-white">
             Blog
           </h2>
           <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-300">
@@ -30,18 +30,18 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
         </div>
 
         {posts.length > 0 ? (
-          <div className="grid gap-4">
+          <div className="border-t border-gray-300 dark:border-zinc-700">
             {posts.map((post) => (
               <article
                 key={post.link || post.title}
-                className="rounded-lg border border-gray-200 bg-white p-5 transition-colors hover:border-gray-300 dark:border-zinc-800 dark:bg-black dark:hover:border-zinc-700"
+                className="border-b border-gray-200 py-6 transition-colors hover:border-gray-400 dark:border-zinc-800 dark:hover:border-zinc-600"
               >
                 <div className="grid gap-3 md:grid-cols-[9rem_1fr]">
                   <time className="text-sm text-gray-500 dark:text-gray-400">
                     {formatDate(post.pubDate)}
                   </time>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-950 dark:text-white">
+                    <h3 className="text-lg font-normal text-gray-950 dark:text-white">
                       <a
                         href={post.link}
                         target="_blank"
@@ -62,7 +62,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
             ))}
           </div>
         ) : (
-          <div className="rounded-lg border border-gray-200 bg-white p-6 text-sm text-gray-600 dark:border-zinc-800 dark:bg-black dark:text-gray-300">
+          <div className="border-y border-gray-200 py-6 text-sm text-gray-600 dark:border-zinc-800 dark:text-gray-300">
             최신 글을 불러오지 못했습니다. 잠시 후 다시 확인해주세요.
           </div>
         )}

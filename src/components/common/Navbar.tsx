@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+} from "framer-motion";
 import clsx from "clsx";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import ThemeToggle from "@/components/ui/ThemeToggle";
@@ -20,6 +26,14 @@ export default function Navbar() {
   const [active, setActive] = useState<Section>("profile");
   const [menuOpen, setMenuOpen] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+  const progress = shouldReduceMotion ? scrollYProgress : smoothProgress;
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -60,15 +74,18 @@ export default function Navbar() {
     setActive(section);
     document
       .getElementById(section)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      ?.scrollIntoView({
+        behavior: shouldReduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
   };
 
   return (
     <motion.nav
       className="fixed left-0 right-0 top-0 z-50 border-b border-gray-200 bg-white/85 backdrop-blur-md transition-colors dark:border-zinc-800 dark:bg-black/80"
-      initial={{ y: -50, opacity: 0 }}
+      initial={shouldReduceMotion ? false : { y: -16, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.35 }}
+      transition={{ duration: 0.28 }}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a
@@ -77,13 +94,13 @@ export default function Navbar() {
             event.preventDefault();
             handleNavigate("profile");
           }}
-          className="rounded-md text-lg font-bold text-gray-950 transition-colors hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-white dark:hover:text-blue-400"
+          className="text-lg font-normal text-gray-950 transition-colors hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-white dark:hover:text-blue-400"
         >
           paicearea
         </a>
 
         <div className="hidden items-center gap-2 md:flex">
-          <ul className="flex gap-1 text-sm font-medium text-gray-700 dark:text-gray-200">
+          <ul className="flex gap-5 text-sm font-normal text-gray-600 dark:text-gray-300">
             {sections.map((section) => (
               <li key={section}>
                 <a
@@ -93,10 +110,10 @@ export default function Navbar() {
                     handleNavigate(section);
                   }}
                   className={clsx(
-                    "block rounded-md px-3 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+                    "block border-b py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
                     active === section
-                      ? "bg-gray-200 text-gray-950 dark:bg-zinc-800 dark:text-white"
-                      : "hover:bg-gray-100 dark:hover:bg-zinc-900"
+                      ? "border-gray-950 text-gray-950 dark:border-white dark:text-white"
+                      : "border-transparent hover:border-gray-300 hover:text-gray-950 dark:hover:border-zinc-600 dark:hover:text-white"
                   )}
                 >
                   {labels[section]}
@@ -128,7 +145,7 @@ export default function Navbar() {
       <AnimatePresence initial={false}>
         {menuOpen && (
           <motion.ul
-            className="flex flex-col gap-2 border-t border-gray-200 bg-white px-4 pb-4 pt-2 text-sm font-medium text-gray-800 dark:border-zinc-800 dark:bg-black dark:text-white md:hidden"
+            className="flex flex-col border-t border-gray-200 bg-white px-4 pb-4 pt-2 text-sm font-normal text-gray-800 dark:border-zinc-800 dark:bg-black dark:text-white md:hidden"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -143,10 +160,10 @@ export default function Navbar() {
                     handleNavigate(section);
                   }}
                   className={clsx(
-                    "block rounded-md px-3 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+                    "block border-l px-3 py-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
                     active === section
-                      ? "bg-gray-200 text-gray-950 dark:bg-zinc-800 dark:text-white"
-                      : "hover:bg-gray-100 dark:hover:bg-zinc-900"
+                      ? "border-gray-950 text-gray-950 dark:border-white dark:text-white"
+                      : "border-gray-200 hover:border-gray-400 hover:text-gray-950 dark:border-zinc-800 dark:hover:border-zinc-500 dark:hover:text-white"
                   )}
                 >
                   {labels[section]}
@@ -156,6 +173,11 @@ export default function Navbar() {
           </motion.ul>
         )}
       </AnimatePresence>
+      <motion.div
+        aria-hidden="true"
+        className="absolute bottom-[-1px] left-0 h-px w-full origin-left bg-gray-950 dark:bg-white"
+        style={{ scaleX: progress }}
+      />
     </motion.nav>
   );
 }

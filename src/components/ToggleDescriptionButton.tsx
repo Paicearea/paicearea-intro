@@ -18,7 +18,7 @@ export default function ToggleDescriptionButton({
         onClick={() => setIsOpen((current) => !current)}
         aria-expanded={isOpen}
         aria-controls={panelId}
-        className="inline-flex min-h-10 items-center rounded-md border border-gray-200 px-4 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-zinc-800 dark:text-white dark:hover:bg-zinc-800"
+        className="inline-flex min-h-10 items-center border-b border-gray-300 text-sm font-normal text-gray-800 transition-colors hover:border-blue-600 hover:text-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-zinc-700 dark:text-white dark:hover:border-blue-400 dark:hover:text-blue-400"
       >
         {isOpen ? "자기소개 닫기" : "자기소개 보기"}
       </button>
@@ -32,7 +32,7 @@ export default function ToggleDescriptionButton({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.22 }}
-            className="mt-4 rounded-lg border border-gray-200 bg-white p-5 text-gray-800 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-gray-100"
+            className="mt-5 border-l border-gray-200 pl-5 text-gray-800 dark:border-zinc-800 dark:text-gray-100"
           >
             <div className="prose prose-sm max-w-none dark:prose-invert md:prose-base">
               {children}

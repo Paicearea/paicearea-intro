@@ -9,8 +9,9 @@
   --color-white: #ffffff;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic",
-    ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Pretendard Variable", "Pretendard", -apple-system,
+    BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI",
+    "Malgun Gothic", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", "Consolas", monospace;
   color-scheme: light;
 }
@@ -30,7 +31,13 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-weight: 400;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+strong,
+b {
+  font-weight: 500;
 }
 
 ::selection {
