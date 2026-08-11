@@ -13,6 +13,9 @@ try {
 } catch (_) {}
 `;
 
+const pretendardStylesheet =
+  "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: site.title,
@@ -56,6 +59,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link
+          rel="stylesheet"
+          as="style"
+          crossOrigin="anonymous"
+          href={pretendardStylesheet}
+        />
+      </head>
       <body className="min-h-screen">
         <Script
           id="theme-init"

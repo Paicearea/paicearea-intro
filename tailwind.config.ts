@@ -7,7 +7,19 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Pretendard", "ui-sans-serif", "system-ui"],
+        sans: [
+          "Pretendard Variable",
+          "Pretendard",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          "Segoe UI",
+          "Malgun Gothic",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
       },
     },
   },
