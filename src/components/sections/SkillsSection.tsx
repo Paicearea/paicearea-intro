@@ -1,56 +1,53 @@
-"use client";
+import type { SkillsContent } from "@/types/content";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-
-type SkillCategory = {
-  title: string;
-  items: string[];
-};
-
-type SkillsData = {
-  title: string;
-  categories: SkillCategory[];
-};
-
-export default function SkillsSection() {
-  const [skills, setSkills] = useState<SkillsData | null>(null);
-
-  useEffect(() => {
-    fetch("/data/skills.json")
-      .then((res) => res.json())
-      .then(setSkills);
-  }, []);
-
-  if (!skills) return null;
-
+export default function SkillsSection({ skills }: { skills: SkillsContent }) {
   return (
     <section
       id="skills"
-      className="py-24 px-6 dark:text-white transition-colors"
+      className="border-y border-gray-200 bg-gray-50 px-6 py-24 transition-colors dark:border-zinc-800 dark:bg-zinc-950"
     >
-      <motion.div
-        className="max-w-3xl mx-auto p-6"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <h2 className="text-2xl font-semibold mb-6">{skills.title}</h2>
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">
+              Stack
+            </p>
+            <h2 className="mt-2 text-3xl font-bold text-gray-950 dark:text-white">
+              {skills.title}
+            </h2>
+          </div>
+          <p className="max-w-xl text-sm leading-6 text-gray-600 dark:text-gray-300">
+            제품 의도에 맞는 기술을 고르고, 유지보수 가능한 화면 단위로
+            구현합니다.
+          </p>
+        </div>
 
-        <dl className="divide-y divide-gray-200 dark:divide-gray-700 text-sm">
-          {skills.categories.map((cat, idx) => (
-            <div key={idx} className="flex justify-between py-3">
-              <dt className="font-medium text-gray-500 dark:text-gray-400 w-48 shrink-0">
-                {cat.title}
-              </dt>
-              <dd className="text-right dark:text-white flex-1">
-                {cat.items.join(", ")}
-              </dd>
+        <div className="grid gap-4 md:grid-cols-2">
+          {skills.categories.map((category) => (
+            <div
+              key={category.title}
+              className="rounded-lg border border-gray-200 bg-white p-6 transition-colors dark:border-zinc-800 dark:bg-black"
+            >
+              <h3 className="text-lg font-semibold text-gray-950 dark:text-white">
+                {category.title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-300">
+                {category.description}
+              </p>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {category.items.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-md border border-gray-200 px-3 py-1 text-sm text-gray-700 dark:border-zinc-800 dark:text-gray-200"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
-        </dl>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

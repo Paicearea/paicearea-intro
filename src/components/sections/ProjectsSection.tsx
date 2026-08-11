@@ -1,113 +1,136 @@
-"use client";
+import type { Project } from "@/types/content";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+function ProjectLinks({ project }: { project: Project }) {
+  return (
+    <div className="flex flex-wrap gap-3">
+      {project.deploy && (
+        <a
+          href={project.deploy}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-md bg-gray-950 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+        >
+          서비스 보기
+        </a>
+      )}
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-100 dark:border-zinc-700 dark:text-gray-100 dark:hover:bg-zinc-900"
+      >
+        GitHub
+      </a>
+    </div>
+  );
+}
 
-type Project = {
-  title: string;
-  description: string;
-  github: string;
-  deploy?: string;
-  tags: string[];
-};
-
-export default function ProjectsSection() {
-  const [projects, setProjects] = useState<Project[]>([]);
-
-  useEffect(() => {
-    fetch("/data/projects.json")
-      .then((res) => res.json())
-      .then((data) => setProjects(Array.isArray(data) ? data : []))
-      .catch(() => setProjects([]));
-  }, []);
+export default function ProjectsSection({
+  projects,
+}: {
+  projects: Project[];
+}) {
+  const featuredProjects = projects.filter((project) => project.featured);
+  const otherProjects = projects.filter((project) => !project.featured);
 
   return (
-    <motion.section
-      id="projects"
-      className="py-24 px-6 dark:text-white transition-colors"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-    >
-      <div className="max-w-3xl mx-auto p-8">
-        <h2 className="text-3xl font-bold mb-8">🛠 Projects</h2>
+    <section id="projects" className="px-6 py-24 transition-colors">
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-10 max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">
+            Work
+          </p>
+          <h2 className="mt-2 text-3xl font-bold text-gray-950 dark:text-white">
+            Projects
+          </h2>
+          <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-300">
+            기능 목록보다 사용자가 만나는 문제와 화면 흐름을 중심으로
+            정리했습니다.
+          </p>
+        </div>
 
-        <dl className="divide-y divide-gray-200 dark:divide-gray-700">
-          {projects.map((project, i) => (
-            <motion.div
-              key={`${project.title}-${i}`}
-              className="py-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              viewport={{ once: true, amount: 0.3 }}
+        <div className="grid gap-5 lg:grid-cols-2">
+          {featuredProjects.map((project) => (
+            <article
+              key={project.title}
+              className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-colors dark:border-zinc-800 dark:bg-zinc-950"
             >
-              <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
-                  Title
-                </dt>
-                <dd className="text-right dark:text-white flex-1">
-                  {project.title}
-                </dd>
-              </div>
-
-              <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
-                  Description
-                </dt>
-                <dd className="text-right dark:text-white flex-1">
-                  {project.description}
-                </dd>
-              </div>
-
-              <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
-                  Tags
-                </dt>
-                <dd className="text-right dark:text-white flex-1">
-                  {(project.tags ?? []).map((tag) => `#${tag}`).join(", ")}
-                </dd>
-              </div>
-
-              {/* ✅ Deploy (있을 때만 표시) */}
-              {project.deploy && (
-                <div className="flex justify-between py-1 text-sm">
-                  <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
-                    Deploy
-                  </dt>
-                  <dd className="text-right flex-1 overflow-hidden">
-                    <a
-                      href={project.deploy}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline text-blue-500 dark:text-blue-400 hover:opacity-80 w-full break-words block"
-                    >
-                      {project.deploy}
-                    </a>
-                  </dd>
+              <div className="mb-6 flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-sm font-medium text-blue-600 dark:text-blue-400">
+                    {project.role}
+                  </p>
+                  <h3 className="mt-2 text-2xl font-bold text-gray-950 dark:text-white">
+                    {project.title}
+                  </h3>
                 </div>
-              )}
-
-              <div className="flex justify-between py-1 text-sm">
-                <dt className="text-gray-500 dark:text-gray-300 w-28 shrink-0">
-                  GitHub
-                </dt>
-                <dd className="text-right flex-1 overflow-hidden">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline text-blue-500 dark:text-blue-400 hover:opacity-80 w-full break-words block"
-                  >
-                    {project.github}
-                  </a>
-                </dd>
+                <span className="rounded-md border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600 dark:border-zinc-800 dark:text-gray-300">
+                  Featured
+                </span>
               </div>
-            </motion.div>
+
+              <p className="text-base leading-7 text-gray-800 dark:text-gray-100">
+                {project.summary}
+              </p>
+              <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-300">
+                {project.focus}
+              </p>
+
+              <ul className="my-6 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="rounded-md bg-gray-100 px-3 py-1 text-xs text-gray-700 dark:bg-zinc-900 dark:text-gray-200"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+
+              <ProjectLinks project={project} />
+            </article>
           ))}
-        </dl>
+        </div>
+
+        <div className="mt-10 grid gap-4">
+          {otherProjects.map((project) => (
+            <article
+              key={project.title}
+              className="rounded-lg border border-gray-200 p-5 transition-colors hover:bg-gray-50 dark:border-zinc-800 dark:hover:bg-zinc-950"
+            >
+              <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-start">
+                <div>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <h3 className="text-xl font-semibold text-gray-950 dark:text-white">
+                      {project.title}
+                    </h3>
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                      {project.role}
+                    </span>
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-gray-700 dark:text-gray-200">
+                    {project.summary}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">
+                    {project.focus}
+                  </p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <li
+                        key={tag}
+                        className="rounded-md bg-gray-100 px-2.5 py-1 text-xs text-gray-700 dark:bg-zinc-900 dark:text-gray-200"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <ProjectLinks project={project} />
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
