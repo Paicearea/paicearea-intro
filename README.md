@@ -1,59 +1,59 @@
-# 🌐 Paicearea Intro Page
+# Paicearea Intro Page
 
-안녕하세요! 👋
-이 프로젝트는 프론트엔드 개발자 **Paicearea**의 포트폴리오 및 자기소개 페이지입니다.
-Next.js 15의 App Router 구조를 기반으로 하여, 다양한 기술 스택과 깔끔한 UI를 통해 저를 소개하고 있어요.
+프론트엔드 개발자 배채은의 포트폴리오와 자기소개를 담은 Next.js 기반 개인 사이트입니다.
+프로젝트, 기술 스택, 블로그 글, 자기소개를 한 화면에서 빠르게 확인할 수 있도록 구성했습니다.
 
-## ✨ 주요 기능
+## 주요 기능
 
-- **Profile Section**: 기본 프로필 정보 제공
-- **ToggleDescriptionButton**: 클릭 시 MDX 기반 자기소개 전체 내용 표시
-- **ResumeDownloadButton**: PDF 이력서 다운로드 지원
-- **Skills Section**: 기술 스택 소개
-- **Blog Section**: Tistory RSS 피드를 활용한 최신 블로그 글 표시
-- **Dark Mode**: 시스템 설정 감지
+- 프로필과 자기소개 MDX 콘텐츠 표시
+- 프로젝트 카드형 포트폴리오 섹션
+- 기술 스택 그룹화
+- Tistory RSS 기반 최신 블로그 글 표시
+- 클래스 기반 다크 모드
+- 서버 컴포넌트 기반 정적 콘텐츠 렌더링
 
-## 🎨 디자인 시스템 - 테마 컬러
+## 기술 스택
 
-| 이름             | HEX 코드  | 용도 예시                                |
-| ---------------- | --------- | ---------------------------------------- |
-| White Base       | `#FFFFFF` | 라이트 모드 기본 배경색 (`--background`) |
-| Dark Base        | `#0A0A0A` | 다크 모드 배경색 (`--background`)        |
-| Foreground Dark  | `#171717` | 라이트 모드 텍스트 색 (`--foreground`)   |
-| Foreground Light | `#EDEDED` | 다크 모드 텍스트 색 (`--foreground`)     |
-| Gray 300         | `#D1D5DB` | 부드러운 회색 텍스트 (`text-gray-300`)   |
-| Gray 500         | `#6B7280` | 중간 강조 텍스트 (`text-gray-500`)       |
-| Gray 700         | `#374151` | 일반 본문 텍스트 (`text-gray-700`)       |
+- Next.js 16 App Router
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- next-mdx-remote
+- rss-parser
 
-## 🛠 사용 기술
+## 프로젝트 구조
 
-- **Next.js 15 (App Router 기반)**
-- **React 18**
-- **TypeScript**
-- **Tailwind CSS**
-- **Framer Motion**
-- **MDX**
-- **gray-matter** + **next-mdx-remote**
-- **Tistory RSS 파싱 (Fetch 기반)**
-
-## 📦 설치 및 실행
-
-```bash
-git clone https://github.com/paicearea/paicearea-intro-page.git
-cd paicearea-intro-page
-pnpm install
-pnpm dev
-
+```txt
+src/
+  app/              # App Router 페이지, 레이아웃, API route
+  components/       # 섹션, 공통 레이아웃, UI 컴포넌트
+  content/          # 프로필, 프로젝트, 스킬, 소셜, MDX 콘텐츠
+  lib/              # RSS, MDX 서버 유틸
+  types/            # 콘텐츠 타입 정의
+public/
+  images/           # 공개 이미지 자산
 ```
 
-## 🧠 하고 싶은 말
+정적 데이터는 `src/content`에서 타입과 함께 관리합니다. `public`에는 브라우저가 직접 요청해야 하는 이미지와 파비콘만 둡니다.
 
-이 프로젝트는 단순한 소개 페이지라기보다, Next.js를 공부하고 다양한 기능을 경험해보기 위한 학습용 프로젝트입니다.
-다크 모드, MDX 콘텐츠 렌더링, RSS 파싱 등 실무에서 자주 접할 수 있는 기능들을 직접 구현해보며
-프론트엔드 개발자로서의 실력을 키워나가기 위한 작은 실험장이기도 해요.
+## 실행
 
-함께 보고, 이야기하고 싶은 분은 언제든 연락 주세요! 😊
+```bash
+pnpm install
+pnpm dev
+```
 
----
+## 검증
 
-**Made by Paicearea ❤️**
+```bash
+pnpm build
+node node_modules/typescript/bin/tsc --noEmit --incremental false --pretty false
+```
+
+## 성능 메모
+
+- 프로필 이미지는 `profile.webp`로 최적화했습니다.
+- 첫 화면 이미지는 `next/image`와 `preload`를 사용합니다.
+- JSON 런타임 fetch를 제거하고 서버에서 콘텐츠를 직접 렌더링합니다.
+- RSS는 서버 유틸로 통합하고 1시간 단위 재검증을 사용합니다.
