@@ -17,14 +17,16 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
       className="border-t border-gray-200 px-6 py-24 transition-colors dark:border-zinc-800"
     >
       <div className="mx-auto max-w-5xl">
-        <div className="mb-10 max-w-2xl">
-          <p className="text-sm font-normal uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">
-            Writing
-          </p>
-          <h2 className="mt-2 text-4xl font-normal text-gray-950 dark:text-white">
-            Blog
-          </h2>
-          <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-300">
+        <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-normal uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">
+              Writing
+            </p>
+            <h2 className="mt-2 text-4xl font-normal text-gray-950 dark:text-white">
+              Blog
+            </h2>
+          </div>
+          <p className="max-w-xl text-sm leading-6 text-gray-600 dark:text-gray-300">
             학습과 프로젝트 과정에서 얻은 내용을 기록합니다.
           </p>
         </div>
