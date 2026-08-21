@@ -36,19 +36,19 @@ export default function ProjectsSection({
       className="border-t border-gray-200 px-6 py-24 transition-colors dark:border-zinc-800"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="mb-12 grid gap-6 md:grid-cols-[12rem_1fr]">
-          <p className="text-sm font-normal uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">
-            Work
-          </p>
+        <div className="mb-10 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-4xl font-normal leading-tight text-gray-950 dark:text-white">
+            <p className="text-sm font-normal uppercase tracking-[0.12em] text-blue-600 dark:text-blue-400">
+              Work
+            </p>
+            <h2 className="mt-2 text-4xl font-normal text-gray-950 dark:text-white">
               Projects
             </h2>
-            <p className="mt-4 max-w-2xl text-sm leading-6 text-gray-600 dark:text-gray-300">
-              기능 목록보다 사용자가 만나는 문제와 화면 흐름을 중심으로
-              정리했습니다.
-            </p>
           </div>
+          <p className="max-w-xl text-sm leading-6 text-gray-600 dark:text-gray-300">
+            기능 목록보다 사용자가 만나는 문제와 화면 흐름을 중심으로
+            정리했습니다.
+          </p>
         </div>
 
         <div className="border-t border-gray-300 dark:border-zinc-700">
